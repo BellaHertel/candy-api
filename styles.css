@@ -66,36 +66,11 @@ main {
   margin: 5rem 0;
 }
 
-.container {
-  width: 700px;
-}
-
-section {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-}
 
 body {
   font-size: 1.6rem;
   color: #ff0095;
 }
-
-.tranding-slide .tranding-slide-img img {
-  display: flex;
-  flex-direction: column;
-  width: 37rem;
-  height: 42rem;
-  border-radius: 2rem;
-  object-fit: cover;
-}
-
-.swiper-slide-shadow-left,
-.swiper-slide-shadow-right {
-  display: none;
-}
-
 
 /* Modal Content/Box */
 .modal-content {
@@ -165,3 +140,54 @@ body {
   padding: 10px;
 }
 
+
+
+
+
+
+.tranding-slide-img {
+  width: 37rem;
+  height: 42rem;
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+.tranding-slide-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-slide-shadow-left,
+.swiper-slide-shadow-right {
+  display: none;
+}
+
+main {
+  margin: 5rem 0;
+}
+
+.container {
+  width: 1200px;
+} 
+
+section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tranding-slide {
+  flex-basis: auto !important;
+  width: auto !important;
+}
+
+.tranding-slide .tranding-slide-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tranding-slide img {
+  border-radius: 50%;
+}

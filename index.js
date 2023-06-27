@@ -120,9 +120,21 @@ const remove = (id) => {
   }
 };
 
+// Cafes 
+const sortearCafe = async () => {
+  const response = await fetch('https://api.thecoffeeapi.com/v1/recipes/random');
+  const data = await response.json();
 
-  
+  console.log("data " + data)
+  const divImg = document.querySelector('.coffee-img');
+  const img = document.createElement('img');
+  img.src = data.file;
+  divImg.innerHTML = '';
+  divImg.appendChild(img);
+};
 
+
+// Carousel
 var TrandingSlider = new Swiper('.tranding-slider', {
   effect: 'coverflow',
   grabCursor: true,
@@ -146,3 +158,4 @@ var TrandingSlider = new Swiper('.tranding-slider', {
 });
 
 start();
+sortearCafe();
