@@ -36,9 +36,11 @@ const atualizaItens = (arrayApi) => {
           <h3 class="slide-name">${arrayApi[i].name}</h3>
           <h6 class="slide-dsc">${arrayApi[i].dsc}</h6>
           <img src="${arrayApi[i].img}" alt="Tranding">
-          <button onclick="edit('${arrayApi[i].id}')">Editar</button>
-          <button onclick="remove('${arrayApi[i].id}')">Excluir</button>
-        </div>
+          <div class="slide-buttons">
+            <button onclick="edit('${arrayApi[i].id}')">Editar</button>
+            <button onclick="remove('${arrayApi[i].id}')">Excluir</button>
+          </div>
+          </div>
       `;
       swiper.appendChild(divCard);
     };

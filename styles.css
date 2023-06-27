@@ -169,6 +169,9 @@ main {
 
 .container {
   width: 1200px;
+  height: 600px;
+  border: 1px solid black;
+  
 } 
 
 section {
@@ -180,14 +183,49 @@ section {
 .tranding-slide {
   flex-basis: auto !important;
   width: auto !important;
+  
 }
 
+.tranding-slide .tranding-slide-img h3, h6 {
+  margin: 10px;
+}
+
+.tranding-slide .tranding-slide-img h6 {
+  margin: 50px;
+}
+
+
+
 .tranding-slide .tranding-slide-img img {
-  width: 100%;
-  height: 100%;
+  width: 70%;
+  height: 70%;
   object-fit: cover;
 }
 
 .tranding-slide img {
   border-radius: 50%;
+}
+
+.swiper-slide {
+  text-align: center;
+  margin: 20px;
+}
+
+.swiper-slide img {
+  width: 200px;
+  height: 50px;
+}
+
+.slide-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.slide-buttons button {
+  width: 120px;
+  margin: 5px;
+}
+
+.tranding-slide-img {
+  height: auto;
 }
