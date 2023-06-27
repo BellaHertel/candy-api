@@ -1,10 +1,8 @@
-
 const swiper = document.querySelector(".swiper-wrapper")
 const arrayApi = []
 
 let cardList = document.querySelector('.card-list');
 
-// Inicia Array
 // Inicia Array
 const start = async () => {
   try {
@@ -48,31 +46,66 @@ const atualizaItens = (arrayApi) => {
   }
 }
 
-// Atualizar Site 
-// const update = () => {
-    
-//   cardList.innerHTML = "";
-//   for (let i = 0; i < arrayApi.length; i++) {
-//     const divCard = document.createElement('div');
-//     divCard.classList.add("swiper-slide", "tranding-slide");
+// Editar
+const edit = (id) => { 
 
-//     divCard.innerHTML = `
-//       <div class="tranding-slide-img">
-//         <h3 class="slide-name">${arrayApi[i].name}</h3>
-//         <h6 class="slide-dsc">${arrayApi[i].dsc}</h6>
-//         <img src="${arrayApi[i].img}" alt="Tranding">
-//         <button onclick="edit('${arrayApi[i].id}')">Editar</button>
-//         <button onclick="remove('${arrayApi[i].id}')">Excluir</button>
-//       </div>
-//     `;
+  let modal = document.getElementsByClassName("modal")[0];
+  let editBtn = document.querySelector(".edit-btn");
+  let closeBtn = document.querySelector(".close");
+  editBtn.textContent = "Editar Doce"
 
-//     swiper.appendChild(divCard);
-//   }
-// }
+  let inputName = document.querySelector(".input-edit-name")
+  let inputDesc = document.querySelector(".input-edit-desc")
+  let inputImage = document.querySelector(".input-edit-img")
+  let dessertImage = document.querySelector(".dessert-img")
+  let imgElement = document.createElement("img"); 
+
+  modal.style.display = "flex";
+
+// Encontrar item escolhido
+  let foundIndex = -1;
+  arrayApi.forEach((dessert, index) => {
+    if (dessert.id === id) {
+      inputName.value = dessert.name;
+      inputDesc.value = dessert.dsc
+      inputImage.value = dessert.img;
+      imgElement.src=`${dessert.img}`
+      dessertImage.appendChild(imgElement)
+      foundIndex = index
+    }
+  })
+
+  console.log("Editando o Item: \n " + arrayApi[foundIndex])
+
+// Fechar modal
+  closeBtn.removeEventListener('click', closeBtn);
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = "none";
+    dessertImage.innerHTML = ''
+    champFromLocalStorage = ''
+    id = ''
+  }, { once: true });
+
+// Confirmar Edição
+  editBtn.removeEventListener('click', editBtn);
+  editBtn.addEventListener('click', () => {
+
+    arrayApi[foundIndex].name = inputName.value
+    arrayApi[foundIndex].img = inputImage.value
+
+    modal.style.display = "none";
+    dessertImage.innerHTML = ''
+    champFromLocalStorage = ''
+    id = ''
+
+    atualizaItens(arrayApi);
+  }, { once: true });   
+}
 
 // Deletar 
 const remove = (id) => {
-  console.log("Removendo " + id);
+
+  console.log("Removendo Item " + id);
 
   let foundIndex = -1;
   arrayApi.forEach((dessert, index) => {
@@ -83,66 +116,11 @@ const remove = (id) => {
 
   if (foundIndex !== -1) {
     arrayApi.splice(foundIndex, 1);
-    update();
-
+    atualizaItens(arrayApi)
   }
 };
 
-// Editar
-  const edit = (id) => { 
 
-    let modal = document.getElementsByClassName("modal")[0];
-    let editBtn = document.querySelector(".edit-btn");
-    let closeBtn = document.querySelector(".close");
-    editBtn.textContent = "Editar Doce"
-
-    let inputName = document.querySelector(".input-edit-name")
-    let inputDesc = document.querySelector(".input-edit-desc")
-    let inputImage = document.querySelector(".input-edit-img")
-    let dessertImage = document.querySelector(".dessert-img")
-    let imgElement = document.createElement("img"); 
-
-    modal.style.display = "flex";
-
-  // Encontrar item escolhido
-    let foundIndex = -1;
-    arrayApi.forEach((dessert, index) => {
-      if (dessert.id === id) {
-        inputName.value = dessert.name;
-        inputDesc.value = dessert.dsc
-        inputImage.value = dessert.img;
-        imgElement.src=`${dessert.img}`
-        dessertImage.appendChild(imgElement)
-        foundIndex = index
-      }
-    })
-
-    console.log("Editando o Item: \n " + arrayApi[foundIndex])
-
-  // Fechar modal
-    closeBtn.removeEventListener('click', closeBtn);
-    closeBtn.addEventListener('click', () => {
-      modal.style.display = "none";
-      dessertImage.innerHTML = ''
-      champFromLocalStorage = ''
-      id = ''
-    }, { once: true });
-  
-  // Confirmar Edição
-    editBtn.removeEventListener('click', editBtn);
-    editBtn.addEventListener('click', () => {
-
-      arrayApi[foundIndex].name = inputName.value
-      arrayApi[foundIndex].img = inputImage.value
-
-      modal.style.display = "none";
-      dessertImage.innerHTML = ''
-      champFromLocalStorage = ''
-      id = ''
-
-      atualizaItens(arrayApi);
-    }, { once: true });   
-  }
   
 
 var TrandingSlider = new Swiper('.tranding-slider', {
