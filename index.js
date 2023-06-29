@@ -35,9 +35,13 @@ const atualizaItens = (arrayApi) => {
     img.onload = () => { 
       divCard.innerHTML = `
         <div class="tranding-slide-img">
-          <h3 class="slide-name">${arrayApi[i].name}</h3>
-          <h6 class="slide-dsc">${arrayApi[i].dsc}</h6>
-          <img src="${arrayApi[i].img}" alt="Tranding">
+          <div class="slide-text">
+            <h3 class="slide-name">${arrayApi[i].name}</h3>
+            <h6 class="slide-dsc">${arrayApi[i].dsc}</h6>
+          </div>
+          <div class='div-img'>
+            <img src="${arrayApi[i].img}" alt="Tranding">
+          </div>
           <div class="slide-buttons">
             <button onclick="edit('${arrayApi[i].id}')">Editar</button>
             <button onclick="remove('${arrayApi[i].id}')">Excluir</button>
@@ -48,9 +52,13 @@ const atualizaItens = (arrayApi) => {
       img.onerror = () => { 
         divCard.innerHTML = `
         <div class="tranding-slide-img">
-          <h3 class="slide-name">${arrayApi[i].name}</h3>
-          <h6 class="slide-dsc">${arrayApi[i].dsc}</h6>
-          <img src="./assets/dish.jpg" alt="Tranding">
+          <div class="slide-text">
+            <h3 class="slide-name">${arrayApi[i].name}</h3>
+            <h6 class="slide-dsc">${arrayApi[i].dsc}</h6>
+          </div>
+          <div class='div-img'>
+            <img src="./assets/dish.jpg" alt="Tranding" class='div-img'>
+          </div>
           <div class="slide-buttons">
             <button onclick="edit('${arrayApi[i].id}')">Editar</button>
             <button onclick="remove('${arrayApi[i].id}')">Excluir</button>
@@ -58,11 +66,18 @@ const atualizaItens = (arrayApi) => {
           </div>
       `;
       }
-
-    
-
     swiper.appendChild(divCard);
   }
+
+   const imagem = document.querySelector('.div-img');
+
+      imagem.onmouseover = function() {
+        imagem.classList.add('hover');
+      };
+      
+      imagem.onmouseout = function() {
+        imagem.classList.remove('hover');
+      };
 }
 
 // Adicionar Doce
@@ -179,11 +194,6 @@ const remove = (id) => {
     atualizaItens(arrayApi)
   }
 };
-
-
-
-
-// -------------------------------
 
 
 // Books 
