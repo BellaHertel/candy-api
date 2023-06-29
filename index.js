@@ -31,7 +31,8 @@ const atualizaItens = (arrayApi) => {
 
     let img = new Image();
     img.src = arrayApi[i].img;
-    // img.onload = () => {
+
+    img.onload = () => { 
       divCard.innerHTML = `
         <div class="tranding-slide-img">
           <h3 class="slide-name">${arrayApi[i].name}</h3>
@@ -43,9 +44,24 @@ const atualizaItens = (arrayApi) => {
           </div>
           </div>
       `;
-      swiper.appendChild(divCard);
-    //};
-    img.src = arrayApi[i].img;
+    } 
+      img.onerror = () => { 
+        divCard.innerHTML = `
+        <div class="tranding-slide-img">
+          <h3 class="slide-name">${arrayApi[i].name}</h3>
+          <h6 class="slide-dsc">${arrayApi[i].dsc}</h6>
+          <img src="./assets/dish.jpg" alt="Tranding">
+          <div class="slide-buttons">
+            <button onclick="edit('${arrayApi[i].id}')">Editar</button>
+            <button onclick="remove('${arrayApi[i].id}')">Excluir</button>
+          </div>
+          </div>
+      `;
+      }
+
+    
+
+    swiper.appendChild(divCard);
   }
 }
 
