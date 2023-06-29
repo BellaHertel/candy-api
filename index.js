@@ -186,19 +186,82 @@ const remove = (id) => {
 // -------------------------------
 
 
-// Cafes 
+// Books 
 const sortearCafe = async () => {
-  const response = await fetch('https://api.thecoffeeapi.com/v1/recipes/random');
+  const response = await fetch('https://wolnelektury.pl/api/daisy/?format=json');
   const data = await response.json();
+  const bookArray = []
+  data.forEach((book) => {
+    bookArray.push(book);
+  });
 
-  console.log("data " + data)
-  const divImg = document.querySelector('.coffee-img');
-  const img = document.createElement('img');
-  img.src = data.file;
-  divImg.innerHTML = '';
-  divImg.appendChild(img);
+  const books = document.querySelector('.books') 
+  const arr = pegarItensAleatorios(bookArray)
+
+  for(let i = 0; i < arr.length; i++) {
+
+    let book = document.createElement('div')
+
+    book.innerHTML = `
+    <div class="book">
+      <div class='book-title'>
+        <h3 class="slide-name">${arr[i].title}</h3>
+      </div>
+      <div class="book-img">
+        <img src="${arr[i].simple_thumb}">
+      </div>
+    </div>
+`;
+  books.appendChild(book);
+  }
+
+  const imagem = document.querySelector('.book');
+
+  imagem.onmouseover = function() {
+  imagem.classList.add('hover');
+  };
+
+  imagem.onmouseout = function() {
+  imagem.classList.remove('hover');
+  };
 };
 
+
+
+
+
+
+
+
+
+// Livros aleatórios
+function pegarItensAleatorios(array) {
+  const quantidadeItens = 5;
+  const arrayAleatorio = [];
+
+  // Verificar se a quantidade de itens desejada é maior que o tamanho do array original
+  if (quantidadeItens > array.length) {
+    console.log('A quantidade de itens desejada é maior do que o tamanho do array original.');
+    return array;
+  }
+
+  // Gerar índices aleatórios únicos
+  const indicesAleatorios = [];
+  while (indicesAleatorios.length < quantidadeItens) {
+    const indiceAleatorio = Math.floor(Math.random() * array.length);
+    if (!indicesAleatorios.includes(indiceAleatorio)) {
+      indicesAleatorios.push(indiceAleatorio);
+    }
+  }
+
+  // Construir o novo array com os itens aleatórios
+  for (let i = 0; i < quantidadeItens; i++) {
+    const indice = indicesAleatorios[i];
+    arrayAleatorio.push(array[indice]);
+  }
+
+  return arrayAleatorio;
+}
 
 // Carousel
 var TrandingSlider = new Swiper('.tranding-slider', {
